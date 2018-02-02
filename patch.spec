@@ -4,7 +4,7 @@
 #
 Name     : patch
 Version  : 2.7.5
-Release  : 17
+Release  : 18
 URL      : http://mirrors.kernel.org/gnu/patch/patch-2.7.5.tar.gz
 Source0  : http://mirrors.kernel.org/gnu/patch/patch-2.7.5.tar.gz
 Summary  : No detailed summary available
