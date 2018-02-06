@@ -6,7 +6,7 @@
 #
 Name     : patch
 Version  : 2.7.6
-Release  : 21
+Release  : 22
 URL      : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source0  : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source99 : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz.sig
