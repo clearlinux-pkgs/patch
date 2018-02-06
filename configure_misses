@@ -1,0 +1,5 @@
+Configure miss: crtdefs.h
+Configure miss: __mktime_internal
+Configure miss: timezone_t
+Configure miss: whether tzset clobbers localtime buffer
+Configure miss: DOS-style setmode
