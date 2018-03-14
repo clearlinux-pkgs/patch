@@ -6,7 +6,7 @@
 #
 Name     : patch
 Version  : 2.7.6
-Release  : 26
+Release  : 27
 URL      : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source0  : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source99 : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz.sig
@@ -16,6 +16,7 @@ License  : GPL-3.0 GPL-3.0+
 Requires: patch-bin
 Requires: patch-doc
 BuildRequires : attr-dev
+Patch1: cve-2018-6951.patch
 
 %description
 This is GNU patch, which applies diff files to original files.
@@ -48,13 +49,18 @@ doc components for the patch package.
 
 %prep
 %setup -q -n patch-2.7.6
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1517949737
+export SOURCE_DATE_EPOCH=1521055280
+export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs "
+export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs "
+export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs "
+export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -66,7 +72,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1517949737
+export SOURCE_DATE_EPOCH=1521055280
 rm -rf %{buildroot}
 %make_install
 
