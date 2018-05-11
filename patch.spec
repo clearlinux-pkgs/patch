@@ -6,7 +6,7 @@
 #
 Name     : patch
 Version  : 2.7.6
-Release  : 33
+Release  : 34
 URL      : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source0  : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source99 : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz.sig
@@ -69,7 +69,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1525883054
+export SOURCE_DATE_EPOCH=1526014017
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -85,7 +85,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1525883054
+export SOURCE_DATE_EPOCH=1526014017
 rm -rf %{buildroot}
 %make_install
 
