@@ -6,7 +6,7 @@
 #
 Name     : patch
 Version  : 2.7.6
-Release  : 34
+Release  : 35
 URL      : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source0  : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source99 : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz.sig
@@ -27,6 +27,8 @@ Patch1: cve-2018-6951.patch
 Patch2: 0001-Allow-input-files-to-be-missing-for-ed-style-patches.patch
 Patch3: 0002-Fix-arbitrary-command-execution-in-ed-style-patches-.patch
 Patch4: 0003-Invoke-ed-directly-instead-of-using-the-shell.patch
+Patch5: 0001-Don-t-leak-temporary-file-on-failed-ed-style-patch.patch
+Patch6: cve-2018-1000156.patch
 
 %description
 This is GNU patch, which applies diff files to original files.
@@ -63,13 +65,15 @@ doc components for the patch package.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
+%patch6 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1526014017
+export SOURCE_DATE_EPOCH=1526490735
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -85,7 +89,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1526014017
+export SOURCE_DATE_EPOCH=1526490735
 rm -rf %{buildroot}
 %make_install
 
