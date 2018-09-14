@@ -4,3 +4,4 @@ cve-2018-6951.patch
 0003-Invoke-ed-directly-instead-of-using-the-shell.patch
 0001-Don-t-leak-temporary-file-on-failed-ed-style-patch.patch
 cve-2018-1000156.patch
+cve-2018-6952.patch

@@ -6,7 +6,7 @@
 #
 Name     : patch
 Version  : 2.7.6
-Release  : 37
+Release  : 38
 URL      : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source0  : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source99 : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz.sig
@@ -31,6 +31,7 @@ Patch3: 0002-Fix-arbitrary-command-execution-in-ed-style-patches-.patch
 Patch4: 0003-Invoke-ed-directly-instead-of-using-the-shell.patch
 Patch5: 0001-Don-t-leak-temporary-file-on-failed-ed-style-patch.patch
 Patch6: cve-2018-1000156.patch
+Patch7: cve-2018-6952.patch
 
 %description
 This is GNU patch, which applies diff files to original files.
@@ -79,13 +80,14 @@ man components for the patch package.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1534177570
+export SOURCE_DATE_EPOCH=1536946162
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -101,7 +103,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1534177570
+export SOURCE_DATE_EPOCH=1536946162
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/patch
 cp COPYING %{buildroot}/usr/share/doc/patch/COPYING
