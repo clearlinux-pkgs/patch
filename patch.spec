@@ -6,16 +6,16 @@
 #
 Name     : patch
 Version  : 2.7.6
-Release  : 39
+Release  : 40
 URL      : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source0  : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source99 : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+
-Requires: patch-bin
-Requires: patch-license
-Requires: patch-man
+Requires: patch-bin = %{version}-%{release}
+Requires: patch-license = %{version}-%{release}
+Requires: patch-man = %{version}-%{release}
 BuildRequires : attr-dev
 BuildRequires : automake
 BuildRequires : automake-dev
@@ -32,6 +32,7 @@ Patch4: 0003-Invoke-ed-directly-instead-of-using-the-shell.patch
 Patch5: 0001-Don-t-leak-temporary-file-on-failed-ed-style-patch.patch
 Patch6: cve-2018-1000156.patch
 Patch7: cve-2018-6952.patch
+Patch8: CVE-2019-13636.patch
 
 %description
 This is GNU patch, which applies diff files to original files.
@@ -49,8 +50,7 @@ They also fix some bugs.
 %package bin
 Summary: bin components for the patch package.
 Group: Binaries
-Requires: patch-license
-Requires: patch-man
+Requires: patch-license = %{version}-%{release}
 
 %description bin
 bin components for the patch package.
@@ -81,32 +81,37 @@ man components for the patch package.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1536946162
-export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1563407917
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
 %reconfigure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1536946162
+export SOURCE_DATE_EPOCH=1563407917
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/patch
-cp COPYING %{buildroot}/usr/share/doc/patch/COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/patch
+cp COPYING %{buildroot}/usr/share/package-licenses/patch/COPYING
 %make_install
 
 %files
@@ -117,9 +122,9 @@ cp COPYING %{buildroot}/usr/share/doc/patch/COPYING
 /usr/bin/patch
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/patch/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/patch/COPYING
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man1/patch.1
