@@ -6,10 +6,10 @@
 #
 Name     : patch
 Version  : 2.7.6
-Release  : 41
-URL      : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
-Source0  : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
-Source99 : http://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz.sig
+Release  : 42
+URL      : https://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
+Source0  : https://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
+Source1 : https://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+
@@ -88,7 +88,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1563407917
+export SOURCE_DATE_EPOCH=1567642775
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -108,7 +108,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1563407917
+export SOURCE_DATE_EPOCH=1567642775
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/patch
 cp COPYING %{buildroot}/usr/share/package-licenses/patch/COPYING
