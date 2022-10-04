@@ -1,5 +1,6 @@
-Configure miss: crtdefs.h
+Configure miss: DOS-style setmode
 Configure miss: __mktime_internal
+Configure miss: crtdefs.h
+Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: timezone_t
 Configure miss: whether tzset clobbers localtime buffer
-Configure miss: DOS-style setmode

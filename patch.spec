@@ -6,7 +6,7 @@
 #
 Name     : patch
 Version  : 2.7.6
-Release  : 45
+Release  : 46
 URL      : https://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz
 Source1  : https://mirrors.kernel.org/gnu/patch/patch-2.7.6.tar.gz.sig
@@ -90,15 +90,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604362861
+export SOURCE_DATE_EPOCH=1664917758
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
 %reconfigure --disable-static
 make  %{?_smp_mflags}
 
@@ -110,10 +110,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1604362861
+export SOURCE_DATE_EPOCH=1664917758
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/patch
-cp %{_builddir}/patch-2.7.6/COPYING %{buildroot}/usr/share/package-licenses/patch/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/patch-%{version}/COPYING %{buildroot}/usr/share/package-licenses/patch/8624bcdae55baeef00cd11d5dfcfa60f68710a02 || :
 %make_install
 
 %files
